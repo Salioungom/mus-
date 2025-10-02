@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Header } from './components/Header';
 import { HomePage } from './components/HomePage';
-import { OeuvresPage } from './components/OeuvresPage';
+import { OeuvresPageNew } from './components/OeuvresPageNew';
 import { ExperiencePage } from './components/ExperiencePage';
 import { AboutPage } from './components/AboutPage';
 import { HackathonPage } from './components/HackathonPage';
@@ -16,7 +16,7 @@ export default function App() {
       case 'accueil':
         return <HomePage onNavigate={setCurrentPage} />;
       case 'oeuvres':
-        return <OeuvresPage />;
+        return <OeuvresPageNew />;
       case 'experience':
         return <ExperiencePage />;
       case 'about':

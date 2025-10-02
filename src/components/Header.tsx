@@ -1,5 +1,8 @@
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { LanguageSelector } from './LanguageSelector';
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../translations';
 
 interface HeaderProps {
   currentPage: string;
@@ -8,14 +11,15 @@ interface HeaderProps {
 
 export function Header({ currentPage, onNavigate }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
+  const { t } = useLanguage();
+
   const navItems = [
-    { id: 'accueil', label: 'Accueil' },
-    { id: 'oeuvres', label: 'Œuvres' },
-    { id: 'experience', label: 'Expérience' },
-    { id: 'about', label: 'À propos' },
-    { id: 'hackathon', label: 'Hackathon' },
-    { id: 'contact', label: 'Contact' },
+    { id: 'accueil', label: t(translations.nav.home) },
+    { id: 'oeuvres', label: t(translations.nav.artworks) },
+    { id: 'experience', label: t(translations.nav.experience) },
+    { id: 'about', label: t(translations.nav.about) },
+    { id: 'hackathon', label: t(translations.nav.hackathon) },
+    { id: 'contact', label: t(translations.nav.contact) },
   ];
 
   return (
@@ -37,32 +41,36 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
           </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => onNavigate(item.id)}
-                className={`relative py-2 transition-colors ${
-                  currentPage === item.id
-                    ? 'text-[var(--gold)]'
-                    : 'text-[var(--off-white)] hover:text-[var(--gold)]'
-                }`}
-              >
-                {item.label}
-                {currentPage === item.id && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--gold)]" />
-                )}
-              </button>
-            ))}
-          </nav>
+          <div className="flex items-center gap-6">
+            <nav className="hidden lg:flex items-center gap-8">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => onNavigate(item.id)}
+                  className={`relative py-2 transition-colors ${
+                    currentPage === item.id
+                      ? 'text-[var(--gold)]'
+                      : 'text-[var(--off-white)] hover:text-[var(--gold)]'
+                  }`}
+                >
+                  {item.label}
+                  {currentPage === item.id && (
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--gold)]" />
+                  )}
+                </button>
+              ))}
+            </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 hover:bg-white/10 rounded-lg transition-colors"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+            <LanguageSelector />
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 hover:bg-white/10 rounded-lg transition-colors"
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
