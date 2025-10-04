@@ -1,4 +1,3 @@
-import React from 'react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Card } from './ui/card';
 import { MapPin, Calendar, Users, Award } from 'lucide-react';

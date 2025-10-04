@@ -3,7 +3,7 @@ import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 import { Badge } from './ui/badge';
-import { QrCode, Headphones, Video, Pause, Play, Loader as Loader2 } from 'lucide-react';
+import { QrCode, Video, Pause, Play, Loader as Loader2 } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { supabase, Artwork, ArtworkDescription } from '../lib/supabase';

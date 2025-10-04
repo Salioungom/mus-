@@ -4,7 +4,6 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function ContactPage() {
   return (

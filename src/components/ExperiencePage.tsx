@@ -2,7 +2,7 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { QrCode, Headphones, Globe, Smartphone, Volume2, Languages } from 'lucide-react';
+import { QrCode, Headphones, Smartphone, Volume2, Languages } from 'lucide-react';
 
 export function ExperiencePage() {
   return (

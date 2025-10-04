@@ -81,7 +81,7 @@ const artworks: Artwork[] = [
 ];
 
 export function OeuvresPage() {
-  const [selectedArtwork, setSelectedArtwork] = useState<Artwork | null>(null);
+  const [, setSelectedArtwork] = useState<Artwork | null>(null);
 
   return (
     <div className="min-h-screen py-24 bg-[var(--off-white)]">
