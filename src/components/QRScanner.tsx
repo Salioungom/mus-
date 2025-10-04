@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Button } from './ui/button';
-import { QrCode, X } from 'lucide-react';
+import { QrCode } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 // Déclaration du type pour la variable globale
@@ -143,15 +143,14 @@ export function QRScanner({ onScan }: QRScannerProps) {
     <div className="text-center">
       <Button
         onClick={() => setIsOpen(true)}
-        variant="outline"
-        className="border-[var(--gold)] text-[var(--gold)] hover:bg-[var(--gold)]/10 transition-colors"
+        className="bg-[var(--gold)] hover:bg-[var(--ochre)] text-[var(--deep-black)] transition-colors"
       >
         <QrCode size={18} className="mr-2" />
         {t({ fr: 'Scanner un QR Code', en: 'Scan QR Code', wo: 'Scan Code QR' })}
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="sm:max-w-[400px] p-6">
+        <DialogContent className="w-[90%] lg:w-1/2 max-w-2xl mx-auto p-6">
           <DialogHeader>
             <DialogTitle className="text-lg font-medium">
               {t({ fr: 'Scanner un QR Code', en: 'Scan QR Code', wo: 'Skanu QR Code bi' })}
@@ -188,14 +187,6 @@ export function QRScanner({ onScan }: QRScannerProps) {
             ) : (
               <div className="relative">
                 <div id="qr-reader" className="w-full aspect-square border rounded-lg overflow-hidden" />
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={stopScanning}
-                  className="absolute top-2 right-2 h-8 w-8 rounded-full bg-white/90 hover:bg-white"
-                >
-                  <X className="h-4 w-4" />
-                </Button>
               </div>
             )}
 
