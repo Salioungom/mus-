@@ -3,9 +3,9 @@ import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 import { Badge } from './ui/badge';
-import { QrCode, Video, Pause, Play, Loader as Loader2 } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
-import { QRCodeSVG } from 'qrcode.react';
+import { useState, useEffect } from 'react';
+import { QrCode, Video, Headphones } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { supabase, Artwork, ArtworkDescription } from '../lib/supabase';
 import { QRScanner } from './QRScanner';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -16,9 +16,9 @@ export function OeuvresPageNew() {
   const [selectedArtwork, setSelectedArtwork] = useState<Artwork | null>(null);
   const [description, setDescription] = useState<ArtworkDescription | null>(null);
   const [loading, setLoading] = useState(true);
-  const [playingAudio, setPlayingAudio] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isErrorDialogOpen, setIsErrorDialogOpen] = useState(false);
   const { language, t } = useLanguage();
 
   useEffect(() => {
@@ -70,18 +70,6 @@ export function OeuvresPageNew() {
     }
   };
 
-  const toggleAudio = () => {
-    if (!audioRef.current || !description?.audio_url) return;
-
-    if (playingAudio === selectedArtwork?.id) {
-      audioRef.current.pause();
-      setPlayingAudio(null);
-    } else {
-      audioRef.current.play();
-      setPlayingAudio(selectedArtwork?.id || null);
-    }
-  };
-
   const getTitle = (artwork: Artwork) => {
     switch (language) {
       case 'en': return artwork.title_en;
@@ -118,7 +106,7 @@ export function OeuvresPageNew() {
         </div>
 
         <div className="flex flex-wrap gap-2 justify-center mb-8">
-          {categories.map((category) => (
+          {categories.map((category: string) => (
             <Button
               key={category}
               onClick={() => setSelectedCategory(category)}
@@ -136,7 +124,7 @@ export function OeuvresPageNew() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {filteredArtworks.map((artwork) => (
+          {filteredArtworks.map((artwork: Artwork) => (
             <Card key={artwork.id} className="group overflow-hidden border-[var(--gold)]/20 hover:border-[var(--gold)]/50 transition-all hover:shadow-xl">
               <div className="relative h-80 overflow-hidden">
                 <ImageWithFallback
@@ -165,6 +153,7 @@ export function OeuvresPageNew() {
                       {t(translations.artworks.viewDetails)}
                     </Button>
                   </DialogTrigger>
+                  
                   <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
                     <DialogHeader>
                       <DialogTitle className="text-[var(--deep-black)]">
@@ -190,84 +179,82 @@ export function OeuvresPageNew() {
                         </Badge>
                       </div>
 
-                      {description && (
-                        <>
-                          <div>
-                            <h4 className="mb-2 text-[var(--deep-black)] font-semibold">Description</h4>
-                            <p className="text-gray-600">
-                              {description.description}
-                            </p>
-                          </div>
+                      <div>
+                        <h4 className="mb-2 text-[var(--deep-black)] font-semibold">Description</h4>
+                        <p className="text-gray-600">
+                          {description?.description || t(translations.artworks.description)}
+                        </p>
+                      </div>
 
-                          {description.history && (
-                            <div>
-                              <h4 className="mb-2 text-[var(--deep-black)] font-semibold">
-                                {t(translations.artworks.history)}
-                              </h4>
-                              <p className="text-gray-600">
-                                {description.history}
-                              </p>
-                            </div>
-                          )}
-                        </>
+                      {description?.history && (
+                        <div>
+                          <h4 className="mb-2 text-[var(--deep-black)] font-semibold">Histoire et Contexte</h4>
+                          <p className="text-gray-600">{description.history}</p>
+                        </div>
                       )}
 
                       <div className="grid sm:grid-cols-2 gap-4">
-                        {description?.audio_url && (
-                          <>
-                            <Button
-                              onClick={toggleAudio}
-                              variant="outline"
-                              className="gap-2 border-[var(--gold)] text-[var(--gold)] hover:bg-[var(--gold)] hover:text-[var(--deep-black)]"
-                            >
-                              {playingAudio === artwork.id ? (
-                                <><Pause size={18} /> {t(translations.artworks.pauseAudio)}</>
-                              ) : (
-                                <><Play size={18} /> {t(translations.artworks.playAudio)}</>
-                              )}
-                            </Button>
-                            <audio
-                              ref={audioRef}
-                              src={description.audio_url}
-                              onEnded={() => setPlayingAudio(null)}
-                            />
-                          </>
-                        )}
-                        {description?.video_url && (
-                          <Button
-                            onClick={() => window.open(description.video_url!, '_blank')}
-                            variant="outline"
-                            className="gap-2 border-[var(--gold)] text-[var(--gold)] hover:bg-[var(--gold)] hover:text-[var(--deep-black)]"
-                          >
-                            <Video size={18} />
-                            {t(translations.artworks.watchVideo)}
-                          </Button>
-                        )}
+                        <Button
+                          variant="outline"
+                          className="gap-2 border-[var(--gold)] text-[var(--gold)] hover:bg-[var(--gold)] hover:text-[var(--deep-black)]"
+                          onClick={() => {
+                            if (description?.audio_url) {
+                              window.open(description.audio_url, '_blank');
+                            } else {
+                              setErrorMessage("L'audio guide n'est pas disponible pour cette œuvre.");
+                              setIsErrorDialogOpen(true);
+                            }
+                          }}
+                        >
+                          <Headphones size={18} />
+                          Écouter l'audio guide
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="gap-2 border-[var(--gold)] text-[var(--gold)] hover:bg-[var(--gold)] hover:text-[var(--deep-black)]"
+                          onClick={() => {
+                            if (description?.video_url) {
+                              window.open(description.video_url, '_blank');
+                            } else {
+                              setErrorMessage("La vidéo n'est pas disponible pour cette œuvre.");
+                              setIsErrorDialogOpen(true);
+                            }
+                          }}
+                        >
+                          <Video size={18} />
+                          Voir la vidéo
+                        </Button>
                       </div>
 
                       <div className="p-4 bg-[var(--off-white)] rounded-lg border border-[var(--gold)]/20">
                         <div className="flex items-center gap-3 mb-3">
                           <QrCode className="text-[var(--gold)]" size={24} />
-                          <h4 className="text-[var(--deep-black)] font-semibold">
-                            {t(translations.artworks.qrCode)}
-                          </h4>
+                          <h4 className="text-[var(--deep-black)] font-semibold">Code QR</h4>
                         </div>
-                        <div className="flex flex-col items-center gap-4">
-                          <div className="bg-white p-4 rounded-lg">
-                            <QRCodeSVG
-                              value={artwork.id}
-                              size={200}
-                              level="H"
-                              includeMargin
-                            />
-                          </div>
-                          <p className="text-sm text-gray-600 text-center">
-                            {t(translations.artworks.qrDescription)}
-                          </p>
-                        </div>
+                        <p className="text-sm text-gray-600">
+                          Scannez le QR code devant l'œuvre au musée pour accéder à cette page
+                          et découvrir du contenu exclusif
+                        </p>
                       </div>
                     </div>
-                  </DialogContent>
+                    <Dialog open={isErrorDialogOpen} onOpenChange={setIsErrorDialogOpen}>
+                      <DialogContent className="w-[90%] sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto bg-white rounded-lg shadow-xl p-6">
+                        <DialogHeader className="mb-4">
+                          <DialogTitle className="text-xl md:text-2xl text-[var(--deep-black)]">
+                            Information
+                          </DialogTitle>
+                        </DialogHeader>
+                        <div className="py-2">
+                          <p className="text-base md:text-lg text-gray-700">
+                            {errorMessage}
+                          </p>
+                        </div>
+                        <div className="mt-6 flex justify-end">
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+               </DialogContent>
+   
                 </Dialog>
               </div>
             </Card>
