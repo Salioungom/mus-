@@ -16,6 +16,10 @@ export default defineConfig({
     react()
   ],
   
+  // Configuration des variables d'environnement
+  // Les variables préfixées par VITE_ sont automatiquement chargées par Vite
+  // et disponibles via import.meta.env.VITE_*
+  
   // Désactiver les source maps en développement
   css: {
     devSourcemap: false
@@ -70,8 +74,5 @@ export default defineConfig({
     }
   },
 
-  // Configuration supplémentaire
-  define: {
-    'process.env': {}
-  }
+  // Optimisation des dépendances
 });
