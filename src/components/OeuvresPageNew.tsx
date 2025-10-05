@@ -517,29 +517,61 @@ export function OeuvresPageNew() {
               variant="outline"
               className="bg-[var(--gold)] hover:bg-[var(--ochre)] text-[var(--deep-black)]"
             >
-              {t({ fr: '← Retour à la galerie', en: '← Back to gallery', wo: '← Déggoo galeri bi' })}
+              {t({ fr: '← Retour à la galerie', en: '← Back to gallery', wo: '← Délou ci galeri bi' })}
             </Button>
           ) : (
-            <div className="w-full max-w-4xl overflow-x-auto">
-              <div className="flex justify-center sm:justify-center gap-2 py-2 px-2 min-w-max">
-                {categories.map(category => (
-                  <Button
-                    key={category}
-                    onClick={() => setSelectedCategory(category)}
-                    variant={selectedCategory === category ? 'default' : 'outline'}
-                    className={
-                      `whitespace-nowrap px-4 py-2 text-sm sm:text-base transition-all duration-200 ${
-                        selectedCategory === category
-                          ? 'bg-[var(--gold)] hover:bg-[var(--ochre)] text-[var(--deep-black)]'
-                          : 'border-[var(--gold)]/40 hover:border-[var(--gold)]/60 hover:bg-[var(--gold)]/10 text-[var(--deep-black)]'
-                      }`
-                    }
-                  >
-                    {t(translations.artworks.categories[category as keyof typeof translations.artworks.categories] || { fr: category, en: category, wo: category })}
-                  </Button>
-                ))}
-              </div>
-            </div>
+            // <div className="w-full max-w-4xl overflow-x-auto">
+            //   <div className="flex justify-center sm:justify-center gap-2 py-2 px-2 min-w-max">
+            //     {categories.map(category => (
+            //       <Button
+            //         key={category}
+            //         onClick={() => setSelectedCategory(category)}
+            //         variant={selectedCategory === category ? 'default' : 'outline'}
+            //         className={
+            //           `whitespace-nowrap px-4 py-2 text-sm sm:text-base transition-all duration-200 ${
+            //             selectedCategory === category
+            //               ? 'bg-[var(--gold)] hover:bg-[var(--ochre)] text-[var(--deep-black)]'
+            //               : 'border-[var(--gold)]/40 hover:border-[var(--gold)]/60 hover:bg-[var(--gold)]/10 text-[var(--deep-black)]'
+            //           }`
+            //         }
+            //       >
+            //         {t(translations.artworks.categories[category as keyof typeof translations.artworks.categories] || { fr: category, en: category, wo: category })}
+            //       </Button>
+            //     ))}
+            //   </div>
+            // </div>
+            <div className="w-full mb-6">
+  <div className="flex justify-center">
+    <div className="flex gap-3 sm:gap-4 py-2 px-2 max-w-full overflow-x-auto scrollbar-hide">
+      <div className="flex flex-nowrap gap-3 sm:gap-4">
+        {categories.map((category) => (
+          <Button
+            key={category}
+            onClick={() => setSelectedCategory(category)}
+            variant={selectedCategory === category ? 'default' : 'outline'}
+            className={`whitespace-nowrap transition-all duration-200 
+              text-xs sm:text-sm md:text-base 
+              px-3 sm:px-4 py-1.5 sm:py-2 
+              rounded-full
+              ${
+                selectedCategory === category
+                  ? 'bg-[var(--gold)] hover:bg-[var(--ochre)] text-[var(--deep-black)]'
+                  : 'border-[var(--gold)]/40 hover:border-[var(--gold)]/60 hover:bg-[var(--gold)]/10 text-[var(--deep-black)]'
+              }`}
+          >
+            {t(
+              translations.artworks.categories[
+                category as keyof typeof translations.artworks.categories
+              ] || { fr: category, en: category, wo: category }
+            )}
+          </Button>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+
           )}
         </div>
 
