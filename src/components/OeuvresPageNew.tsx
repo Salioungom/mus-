@@ -330,6 +330,7 @@ import { translations } from '../translations';
 export function OeuvresPageNew() {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [selectedArtwork, setSelectedArtwork] = useState<Artwork | null>(null);
+  const [scannedArtwork, setScannedArtwork] = useState<Artwork | null>(null);
   const [description, setDescription] = useState<ArtworkDescription | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -451,9 +452,12 @@ export function OeuvresPageNew() {
 
   const handleQRScan = async (qrCode: string) => {
     try {
+      setLoading(true);
       const artwork = await getArtworkByQr(qrCode, language);
       if (artwork) {
-        setSelectedArtwork({ ...artwork, qr_code_data: qrCode });
+        const artworkWithQr = { ...artwork, qr_code_data: qrCode };
+        setScannedArtwork(artworkWithQr);
+        setSelectedArtwork(artworkWithQr);
         setIsErrorDialogOpen(false);
       } else {
         setErrorMessage(
@@ -475,6 +479,8 @@ export function OeuvresPageNew() {
         })
       );
       setIsErrorDialogOpen(true);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -489,8 +495,9 @@ export function OeuvresPageNew() {
     }
   };
 
-  const filteredArtworks =
-    selectedCategory === 'all'
+  const filteredArtworks = scannedArtwork 
+    ? [scannedArtwork] 
+    : selectedCategory === 'all'
       ? artworks
       : artworks.filter((a) => a.category === selectedCategory);
 
@@ -534,30 +541,51 @@ export function OeuvresPageNew() {
           </div>
         </div>
 
-        {/* Boutons filtres */}
-        <div className="flex flex-wrap gap-2 justify-center mb-8">
-          {categories.map((category: string) => (
+        {/* Boutons filtres et retour */}
+        <div className="flex flex-col items-center gap-4 mb-8">
+          {scannedArtwork && (
             <Button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              variant={selectedCategory === category ? 'default' : 'outline'}
-              className={
-                selectedCategory === category
-                  ? 'bg-[var(--gold)] hover:bg-[var(--ochre)] text-[var(--deep-black)]'
-                  : 'border-[var(--gold)]/30 hover:border-[var(--gold)]/60 hover:bg-[var(--gold)]/10'
-              }
+              onClick={() => {
+                setScannedArtwork(null);
+                setSelectedArtwork(null);
+              }}
+              variant="outline"
+              className="bg-[var(--gold)] hover:bg-[var(--ochre)] text-[var(--deep-black)]"
             >
-              {t(
-                translations.artworks.categories[
-                  category as keyof typeof translations.artworks.categories
-                ] || { fr: category, en: category, wo: category }
-              )}
+              {t({
+                fr: '← Retour à la galerie',
+                en: '← Back to gallery',
+                wo: '← Déggoo galeri bi'
+              })}
             </Button>
-          ))}
+          )}
+          
+          {!scannedArtwork && (
+            <div className="flex flex-wrap gap-2 justify-center">
+              {categories.map((category: string) => (
+                <Button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  variant={selectedCategory === category ? 'default' : 'outline'}
+                  className={
+                    selectedCategory === category
+                      ? 'bg-[var(--gold)] hover:bg-[var(--ochre)] text-[var(--deep-black)]'
+                      : 'border-[var(--gold)]/30 hover:border-[var(--gold)]/60 hover:bg-[var(--gold)]/10'
+                  }
+                >
+                  {t(
+                    translations.artworks.categories[
+                      category as keyof typeof translations.artworks.categories
+                    ] || { fr: category, en: category, wo: category }
+                  )}
+                </Button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Liste des œuvres */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className={`${scannedArtwork ? 'max-w-3xl mx-auto' : 'grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto'}`}>
           {filteredArtworks.map((artwork: Artwork) => (
             <Card
               key={artwork.id}
