@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Button } from './ui/button';
-import { QrCode } from 'lucide-react';
+import { QrCode, Loader2 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { supabase } from '../lib/supabase';
+import { Artwork } from '../types';
 
 // Déclaration du type pour la variable globale
 declare global {
@@ -12,12 +14,13 @@ declare global {
 }
 
 interface QRScannerProps {
-  onScan: (artworkId: string) => void;
+  onScan: (artwork: Artwork) => void;
 }
 
 export function QRScanner({ onScan }: QRScannerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string>('');
   const html5QrCodeRef = useRef<any>(null);
   const { t } = useLanguage();
@@ -25,6 +28,11 @@ export function QRScanner({ onScan }: QRScannerProps) {
   useEffect(() => {
     if (typeof window === 'undefined') return; // SSR safe
     if (!isOpen || !isScanning) return;
+    
+    // Reset error when opening the dialog
+    if (isOpen) {
+      setError('');
+    }
 
     let isMounted = true;
     const qrReaderElement = document.getElementById('qr-reader');
@@ -68,10 +76,10 @@ export function QRScanner({ onScan }: QRScannerProps) {
               await html5QrCode.start(
                 cameraConfig,
                 config,
-                (decodedText: string) => {
+                async (decodedText: string) => {
                   if (isMounted) {
                     stopScanning();
-                    onScan(decodedText);
+                    await handleScan(decodedText);
                     resolve();
                   }
                 },
@@ -126,6 +134,90 @@ export function QRScanner({ onScan }: QRScannerProps) {
     };
   }, [isOpen, isScanning, onScan]);
 
+  const fetchArtworkById = async (id: string) => {
+    if (!id) {
+      setError(t({ 
+        fr: 'Aucun ID valide trouvé dans le QR code', 
+        en: 'No valid ID found in QR code',
+        wo: 'Amul ID wu am solo ci code QR bi' 
+      }));
+      return null;
+    }
+
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const { data: artwork, error } = await supabase
+        .from('oeuvres')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+      if (error) throw error;
+      
+      if (!artwork) {
+        setError(t({
+          fr: 'Aucune œuvre trouvée avec cet ID',
+          en: 'No artwork found with this ID',
+          wo: 'Amul tabax wuñu am solo ci ID bii'
+        }));
+        return null;
+      }
+
+      return artwork;
+    } catch (error: any) {
+      console.error('Error fetching artwork:', error);
+      setError(
+        error.message.includes('NetworkError') || error.message.includes('Failed to fetch')
+          ? t({
+              fr: 'Erreur de connexion au serveur. Vérifiez votre connexion internet.',
+              en: 'Server connection error. Please check your internet connection.',
+              wo: 'Jàngalekat du serveur bi. Seet liggéey bi nga am internet bi.'
+            })
+          : t({
+              fr: 'Erreur lors de la récupération des données de l\'œuvre',
+              en: 'Error fetching artwork data',
+              wo: 'Jàpp na jàpp ci wàllu njàngale kàddug tabax bi'
+            })
+      );
+      return null;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleScan = async (decodedText: string) => {
+    // Extract the artwork ID from the QR code
+    // The QR code might contain just the ID or a URL with the ID as a parameter
+    let artworkId = decodedText.trim();
+    
+    // If it's a URL, try to extract the ID from it
+    try {
+      const url = new URL(decodedText);
+      // Check if the URL has an 'id' parameter
+      const idParam = url.searchParams.get('id');
+      if (idParam) {
+        artworkId = idParam;
+      } else {
+        // If no 'id' parameter, try to get the last part of the path
+        const pathParts = url.pathname.split('/').filter(Boolean);
+        if (pathParts.length > 0) {
+          artworkId = pathParts[pathParts.length - 1];
+        }
+      }
+    } catch (e) {
+      // If it's not a valid URL, assume it's just the ID
+      console.log('Not a URL, using as direct ID');
+    }
+    
+    const artwork = await fetchArtworkById(artworkId);
+    if (artwork) {
+      onScan(artwork);
+      setIsOpen(false);
+    }
+  };
+
   const stopScanning = () => {
     if (html5QrCodeRef.current?.isScanning) {
       html5QrCodeRef.current.stop().catch(() => {});
@@ -165,7 +257,18 @@ export function QRScanner({ onScan }: QRScannerProps) {
           </DialogHeader>
           
           <div className="mt-6">
-            {!isScanning ? (
+            {isLoading ? (
+              <div className="flex flex-col items-center justify-center py-12">
+                <Loader2 className="h-12 w-12 text-[var(--gold)] animate-spin mb-4" />
+                <p className="text-sm text-gray-600">
+                  {t({
+                    fr: 'Recherche de l\'œuvre...',
+                    en: 'Searching for artwork...',
+                    wo: 'Ngi doppal tabax bi...',
+                  })}
+                </p>
+              </div>
+            ) : !isScanning ? (
               <div className="space-y-4">
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                   <QrCode className="h-16 w-16 mx-auto text-[var(--gold)] mb-4" />
