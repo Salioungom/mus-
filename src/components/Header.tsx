@@ -16,7 +16,7 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
   const navItems = [
     { id: 'accueil', label: t(translations.nav.home) },
     { id: 'oeuvres', label: t(translations.nav.artworks) },
-    { id: 'experience', label: t(translations.nav.experience) },
+    // { id: 'experience', label: t(translations.nav.experience) },
     { id: 'about', label: t(translations.nav.about) },
     { id: 'evenement', label: t(translations.nav.evenement) },
     { id: 'contact', label: t(translations.nav.contact) },

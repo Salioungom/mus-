@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Header } from './components/Header';
 import { HomePage } from './components/HomePage';
 import { OeuvresPageNew } from './components/OeuvresPageNew';
-import { ExperiencePage } from './components/ExperiencePage';
+// import { ExperiencePage } from './components/ExperiencePage';
 import { AboutPage } from './components/AboutPage';
 import { EvenementPage } from './components/EvenementPage';
 import { ContactPage } from './components/ContactPage';
@@ -42,7 +42,7 @@ const RouterSync: React.FC<RouterSyncProps> = ({ onNavigate }) => {
         <Routes>
           <Route path="/" element={<HomePage onNavigate={handleNavigation} />} />
           <Route path="/oeuvres" element={<OeuvresPageNew />} />
-          <Route path="/experience" element={<ExperiencePage />} />
+          {/* <Route path="/experience" element={<ExperiencePage />} /> */}
           <Route path="/about" element={<AboutPage />} />
           <Route path="/evenement" element={<EvenementPage />} />
           <Route path="/contact" element={<ContactPage />} />

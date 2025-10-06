@@ -168,23 +168,36 @@ export function ContactPage() {
             <p className="text-gray-600">
               Ils nous soutiennent dans notre mission de préservation culturelle
             </p>
-          </div>
+          </div>  
 
           <Card className="p-12 border-[var(--gold)]/30 bg-white">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
-              {[1, 2, 3, 4].map((index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-center p-6 rounded-lg bg-[var(--off-white)] border border-[var(--gold)]/10 hover:border-[var(--gold)]/30 transition-all"
-                >
-                  <div className="text-center">
-                    <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-gradient-to-br from-[var(--gold)] to-[var(--ochre)] flex items-center justify-center">
-                      <span className="text-white">P{index}</span>
-                    </div>
-                    <p className="text-sm text-gray-600">Partenaire {index}</p>
-                  </div>
-                </div>
-              ))}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 items-center justify-items-center">
+              {/* SenStartup */}
+              <div className="flex items-center justify-center p-6 rounded-lg bg-white hover:bg-[var(--off-white)] border border-[var(--gold)]/10 hover:border-[var(--gold)]/30 transition-all">
+                <img 
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbsa63-ITDCabFL-Gy39YMUYzIIYyn2267Tw&s" 
+                  alt="SenStartup" 
+                  className="h-16 object-contain"
+                />
+              </div>
+              
+              {/* Dakar Slush'D */}
+              <div className="flex items-center justify-center p-6 rounded-lg bg-white hover:bg-[var(--off-white)] border border-[var(--gold)]/10 hover:border-[var(--gold)]/30 transition-all">
+                <img 
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvZC9j1XYr7ot4apKisH4eyVvLe6vBDppvCw&s" 
+                  alt="Dakar Slush'D" 
+                  className="h-16 object-contain"
+                />
+              </div>
+              
+              {/* MCN */}
+              <div className="flex items-center justify-center p-6 rounded-lg bg-white hover:bg-[var(--off-white)] border border-[var(--gold)]/10 hover:border-[var(--gold)]/30 transition-all">
+                <img 
+                  src="https://mcn-sn.com/wp-content/uploads/2025/02/Logo_MCN_ang_Fran_Plan-de-travail-1-copie-4.png" 
+                  alt="MCN" 
+                  className="h-16 object-contain"
+                />
+              </div>
             </div>
           </Card>
         </div>
