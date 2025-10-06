@@ -118,13 +118,12 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   Un hackathon unique combinant technologie et culture africaine. 
                   Créez des solutions innovantes pour préserver et promouvoir notre patrimoine.
                 </p>
-                <Button
-                  onClick={() => onNavigate('evenements')}
-                  variant="outline"
-                  className="border-[var(--gold)] text-[var(--gold)] hover:bg-[var(--gold)] hover:text-[var(--deep-black)]"
+                <a 
+                  href="/evenement"
+                  className="inline-flex items-center px-6 py-3 border border-[var(--gold)] text-[var(--gold)] hover:bg-[var(--gold)] hover:text-[var(--deep-black)] rounded-md font-medium transition-colors gap-2"
                 >
                   En savoir plus
-                </Button>
+                </a>
               </div>
               <div className="w-full md:w-64 h-64 rounded-xl overflow-hidden">
                 <ImageWithFallback

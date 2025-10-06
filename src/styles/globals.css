@@ -135,6 +135,12 @@
   }
 }
 
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+
 /**
  * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
  */
