@@ -119,7 +119,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   Créez des solutions innovantes pour préserver et promouvoir notre patrimoine.
                 </p>
                 <Button
-                  onClick={() => onNavigate('hackathon')}
+                  onClick={() => onNavigate('evenements')}
                   variant="outline"
                   className="border-[var(--gold)] text-[var(--gold)] hover:bg-[var(--gold)] hover:text-[var(--deep-black)]"
                 >

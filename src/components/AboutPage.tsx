@@ -41,14 +41,6 @@ export function AboutPage() {
                 <p className="text-gray-700 leading-relaxed text-base md:text-lg">
                   Le MCN œuvre depuis lors pour la valorisation de l'apport des Civilisations noires au patrimoine universel de l'humanité. Ainsi, le visiteur qui franchit la porte de la case à impluvium qui a inspiré son architecture rencontre tout autour du grand Baobab de l'artiste haïtien Edouard Duval-Carrié, l'exposition : l'Afrique, berceau de l'humanité.
                 </p>
-                <div className="mt-6">
-                  <a 
-                    href="/evenements"
-                    className="inline-flex items-center px-6 py-3 bg-[var(--gold)] hover:bg-[var(--ochre)] text-[var(--deep-black)] rounded-md font-medium transition-colors"
-                  >
-                    Découvrir nos événements
-                  </a>
-                </div>
               </div>
 
               <div className="space-y-4">

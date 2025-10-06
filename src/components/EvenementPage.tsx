@@ -39,12 +39,7 @@ export function EvenementPage() {
                       <Users size={18} />
                       S'inscrire maintenant
                     </a>
-                    <a 
-                      href="#evenement-principal"
-                      className="inline-flex items-center px-6 py-3 border border-white/30 hover:bg-white/10 text-white rounded-md font-medium transition-colors gap-2"
-                    >
-                      En savoir plus sur l'hackathon
-                    </a>
+                  
                   </div>
                 </div>
               </div>
@@ -97,92 +92,109 @@ export function EvenementPage() {
         </div>
 
         {/* Dates Clés */}
-        <div className="max-w-6xl mx-auto mb-16">
+        <div className="max-w-6xl mx-auto mb-16 px-4 sm:px-6">
           <div className="text-center mb-12">
-            <h2 className="mb-4 text-[var(--deep-black)]">
+            <h2 className="mb-4 text-3xl font-bold text-[var(--deep-black)]">
               Dates <span className="text-[var(--gold)]">Clés</span>
             </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Découvrez les moments forts de notre événement
+            </p>
           </div>
 
           <div className="relative">
-            {/* Timeline Line */}
+            {/* Timeline Line - Mobile */}
+            <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-[var(--gold)]/30 lg:hidden" />
+            {/* Timeline Line - Desktop */}
             <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-[var(--gold)]/30 hidden lg:block" />
 
-            <div className="space-y-8">
+            <div className="space-y-8 lg:space-y-12">
               {/* Date 1 */}
-              <div className="flex flex-col lg:flex-row gap-8 items-center">
-                <div className="flex-1 lg:text-right">
-                  <Card className="p-6 border-[var(--gold)]/30 bg-[var(--off-white)]">
-                    <div className="flex lg:flex-row-reverse items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-[var(--gold)] text-white flex items-center justify-center flex-shrink-0">
+              <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start lg:items-center relative">
+                <div className="flex-1 lg:text-right lg:pr-8">
+                  <Card className="p-5 sm:p-6 border-[var(--gold)]/30 bg-[var(--off-white)] hover:shadow-md transition-shadow">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[var(--gold)] text-white flex items-center justify-center mx-auto sm:mx-0">
                         <Calendar size={20} />
                       </div>
-                      <div className="flex-1">
-                        <h4 className="mb-1 text-[var(--deep-black)]">Inscriptions</h4>
+                      <div className="text-center sm:text-left">
+                        <h4 className="text-lg font-semibold text-[var(--deep-black)] mb-1">Inscriptions</h4>
                         <p className="text-sm text-gray-600">1 Octobre - 3 Octobre 2025</p>
                       </div>
                     </div>
                   </Card>
                 </div>
-                <div className="w-4 h-4 rounded-full bg-[var(--gold)] hidden lg:block" />
-                <div className="flex-1" />
+                {/* Timeline dot - Mobile */}
+                <div className="absolute left-0 top-6 -ml-3 w-6 h-6 rounded-full bg-white border-4 border-[var(--gold)] lg:hidden z-10" />
+                {/* Timeline dot - Desktop */}
+                <div className="hidden lg:block w-4 h-4 rounded-full bg-[var(--gold)] flex-shrink-0" />
+                <div className="lg:flex-1" />
               </div>
 
               {/* Date 2 */}
-              <div className="flex flex-col lg:flex-row gap-8 items-center">
-                <div className="flex-1" />
-                <div className="w-4 h-4 rounded-full bg-[var(--gold)] hidden lg:block" />
-                <div className="flex-1">
-                  <Card className="p-6 border-[var(--gold)]/30 bg-[var(--off-white)]">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-[var(--gold)] text-white flex items-center justify-center flex-shrink-0">
+              <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start lg:items-center relative">
+                <div className="lg:flex-1" />
+                {/* Timeline dot - Desktop */}
+                <div className="hidden lg:block w-4 h-4 rounded-full bg-[var(--gold)] flex-shrink-0" />
+                <div className="flex-1 lg:pl-8">
+                  <Card className="p-5 sm:p-6 border-[var(--gold)]/30 bg-[var(--off-white)] hover:shadow-md transition-shadow">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[var(--gold)] text-white flex items-center justify-center mx-auto sm:mx-0">
                         <Users size={20} />
                       </div>
-                      <div className="flex-1">
-                        <h4 className="mb-1 text-[var(--deep-black)]">Formation des équipes</h4>
+                      <div className="text-center sm:text-left">
+                        <h4 className="text-lg font-semibold text-[var(--deep-black)] mb-1">Formation des équipes</h4>
                         <p className="text-sm text-gray-600">3 Octobre 2025</p>
                       </div>
                     </div>
                   </Card>
                 </div>
+                {/* Timeline dot - Mobile */}
+                <div className="absolute left-0 top-6 -ml-3 w-6 h-6 rounded-full bg-white border-4 border-[var(--gold)] lg:hidden z-10" />
               </div>
 
               {/* Date 3 */}
-              <div className="flex flex-col lg:flex-row gap-8 items-center">
-                <div className="flex-1 lg:text-right">
-                  <Card className="p-6 border-[var(--gold)]/30 bg-[var(--off-white)]">
-                    <div className="flex lg:flex-row-reverse items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-[var(--gold)] text-white flex items-center justify-center flex-shrink-0">
+              <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start lg:items-center relative">
+                <div className="flex-1 lg:text-right lg:pr-8">
+                  <Card className="p-5 sm:p-6 border-[var(--gold)]/30 bg-[var(--off-white)] hover:shadow-md transition-shadow">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[var(--gold)] text-white flex items-center justify-center mx-auto sm:mx-0">
                         <Code size={20} />
                       </div>
-                      <div className="flex-1">
-                        <h4 className="mb-1 text-[var(--deep-black)]">Événement principal</h4>
+                      <div className="text-center sm:text-left">
+                        <h4 className="text-lg font-semibold text-[var(--deep-black)] mb-1">Événement principal</h4>
                         <p className="text-sm text-gray-600">8-9 Novembre 2025</p>
                       </div>
                     </div>
                   </Card>
                 </div>
-                <div className="w-4 h-4 rounded-full bg-[var(--gold)] hidden lg:block" />
-                <div className="flex-1" />
+                {/* Timeline dot - Mobile */}
+                <div className="absolute left-0 top-6 -ml-3 w-6 h-6 rounded-full bg-white border-4 border-[var(--gold)] lg:hidden z-10" />
+                {/* Timeline dot - Desktop */}
+                <div className="hidden lg:block w-4 h-4 rounded-full bg-[var(--gold)] flex-shrink-0" />
+                <div className="lg:flex-1" />
               </div>
 
               {/* Date 4 */}
-              <div className="flex flex-col lg:flex-row gap-8 items-center">
-                <div className="flex-1" />
-                <div className="w-4 h-4 rounded-full bg-[var(--gold)] hidden lg:block" />
-                <div className="flex-1">
-                  <Card className="p-6 border-[var(--gold)]/30 bg-[var(--off-white)]">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-[var(--gold)] text-white flex items-center justify-center flex-shrink-0">
+              <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start lg:items-center relative">
+                <div className="lg:flex-1" />
+                {/* Timeline dot - Desktop */}
+                <div className="hidden lg:block w-4 h-4 rounded-full bg-[var(--gold)] flex-shrink-0" />
+                <div className="flex-1 lg:pl-8">
+                  <Card className="p-5 sm:p-6 border-[var(--gold)]/30 bg-[var(--off-white)] hover:shadow-md transition-shadow">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[var(--gold)] text-white flex items-center justify-center mx-auto sm:mx-0">
                         <Trophy size={20} />
                       </div>
-                      <div className="flex-1">
-                        <h4 className="mb-1 text-[var(--deep-black)]">Cérémonie de remise des prix</h4>
+                      <div className="text-center sm:text-left">
+                        <h4 className="text-lg font-semibold text-[var(--deep-black)] mb-1">Cérémonie de remise des prix</h4>
                         <p className="text-sm text-gray-600">9 Novembre 2025, 18h00</p>
                       </div>
                     </div>
                   </Card>
                 </div>
+                {/* Timeline dot - Mobile */}
+                <div className="absolute left-0 top-6 -ml-3 w-6 h-6 rounded-full bg-white border-4 border-[var(--gold)] lg:hidden z-10" />
               </div>
             </div>
           </div>
