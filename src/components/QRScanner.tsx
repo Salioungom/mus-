@@ -125,7 +125,7 @@ export function QRScanner({ onScan }: QRScannerProps) {
       setError(
         err.message.includes('NetworkError') || err.message.includes('Failed to fetch')
           ? t({ fr: 'Erreur de connexion au serveur.', en: 'Server connection error.', wo: 'Jàngalekat du serveur bi.' })
-          : t({ fr: 'Erreur lors de la récupération des données', en: 'Error fetching artwork data', wo: 'Jàpp na jàpp ci wàllu njàngale kàddug tabax bi' })
+          : t({ fr: 'Erreur lors de la récupération des données', en: 'Error fetching artwork data', wo: 'amnane ay jafé jafé Skanné QR code bi' })
       );
       return null;
     } finally {
@@ -174,17 +174,17 @@ export function QRScanner({ onScan }: QRScannerProps) {
         className="bg-[var(--gold)] hover:bg-[var(--ochre)] text-[var(--deep-black)] transition-colors"
       >
         <QrCode size={18} className="mr-2" />
-        {t({ fr: 'Scanner un QR Code', en: 'Scan QR Code', wo: 'Scan Code QR' })}
+        {t({ fr: 'Scanner un QR Code', en: 'Scan QR Code', wo: 'Skanèl Code QR bi' })}
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="w-[90%] lg:w-1/2 max-w-2xl mx-auto p-6">
           <DialogHeader>
             <DialogTitle className="text-lg font-medium">
-              {t({ fr: 'Scanner un QR Code', en: 'Scan QR Code', wo: 'Skanu QR Code bi' })}
+              {t({ fr: 'Scanner un QR Code', en: 'Scan QR Code', wo: 'Skanèl Code QR bi' })}
             </DialogTitle>
             <p className="text-sm text-muted-foreground mt-1">
-              {t({ fr: 'Scannez le code QR devant une œuvre pour accéder à ses informations détaillées', en: 'Scan the QR code in front of an artwork to access its detailed information', wo: 'Scan code QR ci kanam tefes ngir gis ay information yu set' })}
+              {t({ fr: 'Scannez le code QR devant une œuvre pour accéder à ses informations détaillées', en: 'Scan the QR code in front of an artwork to access its detailed information', wo: 'Scanèl code QR bi nek ci kanamou oeuvre bi ngir nga meuna yaatal saag xol ' })}
             </p>
           </DialogHeader>
 
@@ -192,14 +192,14 @@ export function QRScanner({ onScan }: QRScannerProps) {
             {isLoading ? (
               <div className="flex flex-col items-center justify-center py-12">
                 <Loader2 className="h-12 w-12 text-[var(--gold)] animate-spin mb-4" />
-                <p className="text-sm text-gray-600">{t({ fr: 'Recherche de l\'œuvre...', en: 'Searching for artwork...', wo: 'Ngi doppal tabax bi...' })}</p>
+                <p className="text-sm text-gray-600">{t({ fr: 'Recherche de l\'œuvre...', en: 'Searching for artwork...', wo: ' Weural oeuvre bi...' })}</p>
               </div>
             ) : !isScanning ? (
               <div className="space-y-4">
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                   <QrCode className="h-16 w-16 mx-auto text-[var(--gold)] mb-4" />
-                  <p className="text-sm text-gray-600 mb-4">{t({ fr: 'Placez le code QR dans le cadre pour le scanner', en: 'Position the QR code within the frame to scan', wo: 'Metti code QR ci kaw la ngir scan ko' })}</p>
-                  <Button onClick={startScanning} className="bg-[var(--gold)] hover:bg-[var(--ochre)] text-[var(--deep-black)]">{t({ fr: 'Démarrer le scan', en: 'Start scanning', wo: 'Démarrer scan bi' })}</Button>
+                  <p className="text-sm text-gray-600 mb-4">{t({ fr: 'Placez le code QR dans le cadre pour le scanner', en: 'Position the QR code within the frame to scan', wo: 'Tégal QR code bi ci cadre bi' })}</p>
+                  <Button onClick={startScanning} className="bg-[var(--gold)] hover:bg-[var(--ochre)] text-[var(--deep-black)]">{t({ fr: 'Démarrer le scan', en: 'Start scanning', wo: 'Tambalil scan bi' })}</Button>
                 </div>
               </div>
             ) : (

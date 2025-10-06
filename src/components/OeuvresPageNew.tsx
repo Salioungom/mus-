@@ -637,12 +637,12 @@ export function OeuvresPageNew() {
                       setErrorMessage(t({ 
                         fr: "L'audio guide n'est pas disponible pour cette œuvre.", 
                         en: "Audio guide is not available for this artwork.", 
-                        wo: "Audio guide bii amul ci tabax bii." 
+                        wo: " œuvre bi amagoul audio guide." 
                       })); 
                       setIsErrorDialogOpen(true);
                     }}
                   >
-                    <Headphones size={18} /> {t({ fr: 'Écouter', en: 'Listen', wo: 'Déggal' })}
+                    <Headphones size={18} /> {t({ fr: 'Écouter', en: 'Listen', wo: 'Dègloul' })}
                   </Button>
                 )}
 
@@ -656,12 +656,13 @@ export function OeuvresPageNew() {
                       setErrorMessage(t({ 
                         fr: "La vidéo n'est pas disponible pour cette œuvre.", 
                         en: "Video is not available for this artwork.", 
-                        wo: "Mbedd mi amul ci tabax bii." 
+                        wo: "oeuvre bi amagoul video." 
+              
                       })); 
                       setIsErrorDialogOpen(true);
                     }}
                   >
-                    <Video size={18} /> {t({ fr: 'Voir la vidéo', en: 'Watch video', wo: 'Gis mbedd mi' })}
+                    <Video size={18} /> {t({ fr: 'Voir la vidéo', en: 'Watch video', wo: 'sétanal video bi' })}
                   </Button>
                 )}
               </div>
@@ -676,7 +677,7 @@ export function OeuvresPageNew() {
                   {t({
                     fr: "Scannez ce code QR pour accéder directement à cette œuvre depuis n'importe où.",
                     en: "Scan this QR code to access this artwork from anywhere.",
-                    wo: "Skanal koodu QR bii ngir gis tabax bii ci kaw ay app yu jëm."
+                    wo: "Skanèl koodu QR bii ngir giss œuvre bi foo mënti nek ."
                   })}
                 </p>
                 <div className="flex justify-center">
