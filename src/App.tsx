@@ -5,7 +5,7 @@ import { HomePage } from './components/HomePage';
 import { OeuvresPageNew } from './components/OeuvresPageNew';
 import { ExperiencePage } from './components/ExperiencePage';
 import { AboutPage } from './components/AboutPage';
-import { HackathonPage } from './components/HackathonPage';
+import { EvenementPage } from './components/EvenementPage';
 import { ContactPage } from './components/ContactPage';
 import { Footer } from './components/Footer';
 import TestSupabasePage from './pages/test-supabase';
@@ -44,7 +44,7 @@ const RouterSync: React.FC<RouterSyncProps> = ({ onNavigate }) => {
           <Route path="/oeuvres" element={<OeuvresPageNew />} />
           <Route path="/experience" element={<ExperiencePage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/hackathon" element={<HackathonPage />} />
+          <Route path="/evenement" element={<EvenementPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/test-supabase" element={<TestSupabasePage />} />
           <Route path="*" element={<HomePage onNavigate={handleNavigation} />} />

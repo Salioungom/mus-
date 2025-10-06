@@ -18,7 +18,7 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
     { id: 'oeuvres', label: t(translations.nav.artworks) },
     { id: 'experience', label: t(translations.nav.experience) },
     { id: 'about', label: t(translations.nav.about) },
-    { id: 'hackathon', label: t(translations.nav.hackathon) },
+    { id: 'evenement', label: t(translations.nav.evenement) },
     { id: 'contact', label: t(translations.nav.contact) },
   ];
 
@@ -31,9 +31,11 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
             onClick={() => onNavigate('accueil')}
             className="flex items-center gap-3 hover:opacity-80 transition-opacity"
           >
-            <div className="w-12 h-12 bg-gradient-to-br from-[var(--gold)] to-[var(--ochre)] rounded-lg flex items-center justify-center">
-              <span className="font-serif">MCN</span>
-            </div>
+            <img 
+              src="https://mcn-sn.com/wp-content/uploads/2025/02/Logo_MCN_ang_Fran_Plan-de-travail-1-copie-4.png" 
+              alt="Musée des Civilisations Noires" 
+              className="h-12 w-auto object-contain"
+            />
             <div className="hidden md:block">
               <div className="tracking-wide">Musée des</div>
               <div className="tracking-wide text-[var(--gold)]">Civilisations Noires</div>

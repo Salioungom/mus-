@@ -13,9 +13,9 @@ export function HomePage({ onNavigate }: HomePageProps) {
       <section className="relative h-[calc(100vh-5rem)] min-h-[600px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <ImageWithFallback
-            src="https://images.unsplash.com/photo-1706264568861-81855ecf51a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZnJpY2FuJTIwbXVzZXVtJTIwYXJjaGl0ZWN0dXJlfGVufDF8fHx8MTc1OTM2NjE3N3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            src="https://lh3.googleusercontent.com/p/AF1QipPHWPPPTPqG7vtZCjKmkTHc-pRQFiyIzKDdHSOh=s1360-w1360-h1020-rw"
             alt="Musée des Civilisations Noires"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--deep-black)]/70 via-[var(--deep-black)]/50 to-[var(--deep-black)]/80" />
         </div>
@@ -33,18 +33,18 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
         <div className="relative z-10 container mx-auto px-4 text-center text-white">
           <h1 className="mb-6 max-w-4xl mx-auto">
-            <span className="block mb-2">Découvrez l'héritage des</span>
-            <span className="block text-[var(--gold)]">Civilisations Noires</span>
+            <span className="block mb-4 text-3xl lg:text-5xl font-medium">Découvrez l'héritage des</span>
+            <span className="block text-[var(--gold)] text-5xl lg:text-8xl font-bold">Civilisations Noires</span>
           </h1>
-          <p className="mb-8 max-w-2xl mx-auto text-gray-200">
-            Explorez une collection unique d'œuvres d'art, d'artefacts et d'histoire qui célèbrent 
+          <p className="mb-12 max-w-4xl mx-auto text-gray-200 text-xl lg:text-2xl leading-relaxed font-semibold">
+            Explorez une collection <span className="font-bold">unique</span> d'œuvres d'art, d'artefacts et d'histoire qui célèbrent 
             la richesse et la diversité des cultures africaines.
           </p>
           <Button
             onClick={() => onNavigate('oeuvres')}
             className="bg-[var(--gold)] hover:bg-[var(--ochre)] text-[var(--deep-black)] px-8 py-6 gap-2"
           >
-            Découvrir les œuvres
+            <span className="text-lg lg:text-xl font-medium">Découvrir les œuvres</span>
             <ArrowRight size={20} />
           </Button>
         </div>

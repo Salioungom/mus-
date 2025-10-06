@@ -4,7 +4,7 @@ export const translations = {
     artworks: { fr: 'Œuvres', en: 'Artworks', wo: 'Ay Tefes' },
     experience: { fr: 'Expérience', en: 'Experience', wo: 'Xelaasi' },
     about: { fr: 'À propos', en: 'About', wo: 'Ci Ñu' },
-    hackathon: { fr: 'Hackathon', en: 'Hackathon', wo: 'Hackathon' },
+    evenement: { fr: 'Événement', en: 'Event', wo: 'Evenement' },
     contact: { fr: 'Contact', en: 'Contact', wo: 'Jokkale' }
   },
   home: {

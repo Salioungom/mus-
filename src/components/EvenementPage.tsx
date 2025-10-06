@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Trophy, Calendar, Users, Code, Lightbulb, Award } from 'lucide-react';
 
-export function HackathonPage() {
+export function EvenementPage() {
   return (
     <div className="min-h-screen py-24 bg-white">
       <div className="container mx-auto px-4">
@@ -23,16 +23,29 @@ export function HackathonPage() {
                   <Badge className="mb-4 bg-[var(--gold)] text-[var(--deep-black)] border-0">
                     Événement 2025
                   </Badge>
-                  <h1 className="mb-4 text-white max-w-2xl">
-                    Hackathon Innovation & Patrimoine Culturel
+                  <h1 className="mb-4 text-white text-4xl font-bold max-w-2xl">
+                    Événement Innovation & Patrimoine Culturel
                   </h1>
                   <p className="mb-6 text-gray-200 max-w-xl">
-                    Rejoignez-nous pour un hackathon unique qui combine technologie et culture africaine
+                    Rejoignez-nous pour un événement unique qui combine technologie et culture africaine
                   </p>
-                  <Button className="bg-[var(--gold)] hover:bg-[var(--ochre)] text-[var(--deep-black)] gap-2">
-                    <Users size={18} />
-                    S'inscrire maintenant
-                  </Button>
+                  <div className="flex flex-wrap gap-4">
+                    <a 
+                      href="https://drive.google.com/file/d/1wANY5Fi0AlASDTFs5WyVAJF07AzqUwGW/view" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-6 py-3 bg-[var(--gold)] hover:bg-[var(--ochre)] text-[var(--deep-black)] rounded-md font-medium transition-colors gap-2"
+                    >
+                      <Users size={18} />
+                      S'inscrire maintenant
+                    </a>
+                    <a 
+                      href="#evenement-principal"
+                      className="inline-flex items-center px-6 py-3 border border-white/30 hover:bg-white/10 text-white rounded-md font-medium transition-colors gap-2"
+                    >
+                      En savoir plus sur l'hackathon
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -43,7 +56,7 @@ export function HackathonPage() {
         <div className="max-w-6xl mx-auto mb-16">
           <div className="text-center mb-12">
             <h2 className="mb-4 text-[var(--deep-black)]">
-              <span className="text-[var(--gold)]">Objectif</span> du Hackathon
+              <span className="text-[var(--gold)]">Objectif</span> de l'Événement
             </h2>
           </div>
 
@@ -106,7 +119,7 @@ export function HackathonPage() {
                       </div>
                       <div className="flex-1">
                         <h4 className="mb-1 text-[var(--deep-black)]">Inscriptions</h4>
-                        <p className="text-sm text-gray-600">15 Mars - 15 Avril 2025</p>
+                        <p className="text-sm text-gray-600">1 Octobre - 3 Octobre 2025</p>
                       </div>
                     </div>
                   </Card>
@@ -127,7 +140,7 @@ export function HackathonPage() {
                       </div>
                       <div className="flex-1">
                         <h4 className="mb-1 text-[var(--deep-black)]">Formation des équipes</h4>
-                        <p className="text-sm text-gray-600">20 Avril 2025</p>
+                        <p className="text-sm text-gray-600">3 Octobre 2025</p>
                       </div>
                     </div>
                   </Card>
@@ -143,8 +156,8 @@ export function HackathonPage() {
                         <Code size={20} />
                       </div>
                       <div className="flex-1">
-                        <h4 className="mb-1 text-[var(--deep-black)]">Hackathon</h4>
-                        <p className="text-sm text-gray-600">10-12 Mai 2025 (48h non-stop)</p>
+                        <h4 className="mb-1 text-[var(--deep-black)]">Événement principal</h4>
+                        <p className="text-sm text-gray-600">8-9 Novembre 2025</p>
                       </div>
                     </div>
                   </Card>
@@ -165,7 +178,7 @@ export function HackathonPage() {
                       </div>
                       <div className="flex-1">
                         <h4 className="mb-1 text-[var(--deep-black)]">Cérémonie de remise des prix</h4>
-                        <p className="text-sm text-gray-600">12 Mai 2025, 18h00</p>
+                        <p className="text-sm text-gray-600">9 Novembre 2025, 18h00</p>
                       </div>
                     </div>
                   </Card>
@@ -175,13 +188,79 @@ export function HackathonPage() {
           </div>
         </div>
 
+        {/* Événement Principal */}
+        <div id="evenement-principal" className="max-w-6xl mx-auto mb-16">
+          <div className="text-center mb-12">
+            <h2 className="mb-4 text-[var(--deep-black)]">
+              <span className="text-[var(--gold)]">Événement</span> Principal
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Découvrez les détails de notre hackathon d'innovation culturelle
+            </p>
+          </div>
+          
+          <Card className="p-8 border-[var(--gold)]/30">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <h3 className="text-2xl font-bold text-[var(--deep-black)] mb-4">Hackathon Innovation & Culture</h3>
+                <p className="text-gray-600 mb-6">
+                  Pendant 48 heures, venez relever le défi de créer des solutions innovantes pour la préservation et la mise en valeur du patrimoine culturel africain à travers les nouvelles technologies.
+                </p>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <Calendar className="text-[var(--gold)] mt-1 flex-shrink-0" size={20} />
+                    <div>
+                      <p className="font-medium text-[var(--deep-black)]">8-9 Novembre 2025</p>
+                      <p className="text-sm text-gray-600">48h non-stop d'innovation</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)] mt-1 flex-shrink-0">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <div>
+                      <p className="font-medium text-[var(--deep-black)]">Musée des Civilisations Noires</p>
+                      <p className="text-sm text-gray-600">Dakar, Sénégal</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-6">
+                <h4 className="font-semibold text-[var(--deep-black)] mb-3">Thématiques du hackathon :</h4>
+                <ul className="space-y-2">
+                  <li className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[var(--gold)]"></span>
+                    <span>Réalité augmentée/virtuelle pour l'expérience muséale</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[var(--gold)]"></span>
+                    <span>Solutions numériques pour la préservation du patrimoine</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[var(--gold)]"></span>
+                    <span>Expériences interactives pour les visiteurs</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[var(--gold)]"></span>
+                    <span>Technologies d'accessibilité pour les musées</span>
+                  </li>
+                </ul>
+                <Button className="mt-6 w-full bg-[var(--gold)] hover:bg-[var(--ochre)] text-[var(--deep-black)]">
+                  Voir le règlement complet
+                </Button>
+              </div>
+            </div>
+          </Card>
+        </div>
+
         {/* Prix */}
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto mt-16">
           <div className="text-center mb-12">
             <h2 className="mb-4 text-[var(--deep-black)]">
               Prix & <span className="text-[var(--gold)]">Récompenses</span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="text-gray-600">
               Des prix exceptionnels pour récompenser les meilleures innovations
             </p>
           </div>

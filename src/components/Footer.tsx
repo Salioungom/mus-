@@ -7,10 +7,12 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* About */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-[var(--gold)] to-[var(--ochre)] rounded-lg flex items-center justify-center">
-                <span className="font-serif">MCN</span>
-              </div>
+            <div className="flex items-center gap-3 mb-4">
+              <img 
+                src="https://mcn-sn.com/wp-content/uploads/2025/02/Logo_MCN_ang_Fran_Plan-de-travail-1-copie-4.png" 
+                alt="Musée des Civilisations Noires" 
+                className="h-12 w-auto object-contain"
+              />
               <div className="text-sm">
                 <div>Musée des</div>
                 <div className="text-[var(--gold)]">Civilisations Noires</div>

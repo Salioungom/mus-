@@ -356,6 +356,8 @@ export function OeuvresPageNew() {
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isErrorDialogOpen, setIsErrorDialogOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [nowPlaying, setNowPlaying] = useState<'audio' | 'video' | null>(null);
 
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -520,26 +522,6 @@ export function OeuvresPageNew() {
               {t({ fr: '← Retour à la galerie', en: '← Back to gallery', wo: '← Délou ci galeri bi' })}
             </Button>
           ) : (
-            // <div className="w-full max-w-4xl overflow-x-auto">
-            //   <div className="flex justify-center sm:justify-center gap-2 py-2 px-2 min-w-max">
-            //     {categories.map(category => (
-            //       <Button
-            //         key={category}
-            //         onClick={() => setSelectedCategory(category)}
-            //         variant={selectedCategory === category ? 'default' : 'outline'}
-            //         className={
-            //           `whitespace-nowrap px-4 py-2 text-sm sm:text-base transition-all duration-200 ${
-            //             selectedCategory === category
-            //               ? 'bg-[var(--gold)] hover:bg-[var(--ochre)] text-[var(--deep-black)]'
-            //               : 'border-[var(--gold)]/40 hover:border-[var(--gold)]/60 hover:bg-[var(--gold)]/10 text-[var(--deep-black)]'
-            //           }`
-            //         }
-            //       >
-            //         {t(translations.artworks.categories[category as keyof typeof translations.artworks.categories] || { fr: category, en: category, wo: category })}
-            //       </Button>
-            //     ))}
-            //   </div>
-            // </div>
             <div className="w-full mb-6">
   <div className="flex justify-center">
     <div className="flex gap-3 sm:gap-4 py-2 px-2 max-w-full overflow-x-auto scrollbar-hide">
@@ -644,14 +626,21 @@ export function OeuvresPageNew() {
               )}
 
               {/* Audio / Vidéo */}
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {description?.audio_url ? (
                   <audio ref={audioRef} controls src={description.audio_url} className="w-full mt-2 rounded-lg border border-[var(--gold)]/20" onPlay={handleAudioPlay} />
                 ) : (
                   <Button
                     variant="outline"
                     className="gap-2 border-[var(--gold)] text-[var(--gold)] hover:bg-[var(--gold)] hover:text-[var(--deep-black)]"
-                    onClick={() => console.log("Audio guide non disponible")}
+                    onClick={() => {
+                      setErrorMessage(t({ 
+                        fr: "L'audio guide n'est pas disponible pour cette œuvre.", 
+                        en: "Audio guide is not available for this artwork.", 
+                        wo: "Audio guide bii amul ci tabax bii." 
+                      })); 
+                      setIsErrorDialogOpen(true);
+                    }}
                   >
                     <Headphones size={18} /> {t({ fr: 'Écouter', en: 'Listen', wo: 'Déggal' })}
                   </Button>
@@ -663,7 +652,14 @@ export function OeuvresPageNew() {
                   <Button
                     variant="outline"
                     className="gap-2 border-[var(--gold)] text-[var(--gold)] hover:bg-[var(--gold)] hover:text-[var(--deep-black)]"
-                    onClick={() => console.log("Vidéo non disponible")}
+                    onClick={() => {
+                      setErrorMessage(t({ 
+                        fr: "La vidéo n'est pas disponible pour cette œuvre.", 
+                        en: "Video is not available for this artwork.", 
+                        wo: "Mbedd mi amul ci tabax bii." 
+                      })); 
+                      setIsErrorDialogOpen(true);
+                    }}
                   >
                     <Video size={18} /> {t({ fr: 'Voir la vidéo', en: 'Watch video', wo: 'Gis mbedd mi' })}
                   </Button>
@@ -694,6 +690,20 @@ export function OeuvresPageNew() {
                   />
                 </div>
               </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        {/* Dialogue d'erreur */}
+        <Dialog open={isErrorDialogOpen} onOpenChange={setIsErrorDialogOpen}>
+          <DialogContent className="w-[90vw] sm:max-w-md mx-4 sm:mx-auto">
+            <DialogHeader>
+              <DialogTitle className="text-[var(--deep-black)] text-lg sm:text-xl">
+                {t({ fr: 'Information', en: 'Information', wo: 'Xibaar' })}
+              </DialogTitle>
+            </DialogHeader>
+            <div className="py-4">
+              <p className="text-gray-700 text-sm sm:text-base">{errorMessage}</p>
             </div>
           </DialogContent>
         </Dialog>
