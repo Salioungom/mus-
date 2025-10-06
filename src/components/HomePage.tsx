@@ -15,7 +15,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
           <ImageWithFallback
             src="https://lh3.googleusercontent.com/p/AF1QipPHWPPPTPqG7vtZCjKmkTHc-pRQFiyIzKDdHSOh=s1360-w1360-h1020-rw"
             alt="Musée des Civilisations Noires"
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-center "
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--deep-black)]/70 via-[var(--deep-black)]/50 to-[var(--deep-black)]/80" />
         </div>
